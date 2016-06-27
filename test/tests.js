@@ -4,7 +4,7 @@ var request = require('supertest');
 
 describe('Testing number of combinations', function() {
 
-    var url = 'http://localhost:3000/test';
+    var url = 'https://yahooseven.herokuapp.com/test';
 
     describe('Positive Tests', function() {
         it('should return 1296 combinations for two digit passwords', function(done) {
