@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yahoo Seven Technical Test</title>
+    <script>
+
+        // all valid characters in the charSet
+        var charSet = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        var noOfChars = charSet.length;
+        var noOfComb = 0;
+
+        function generateCombinations(noOfPlaces) {
+            // we generate the sourcecode for the function to execute
+            var functStr = "";
+            for(var i=noOfPlaces; i>0; i--)
+                functStr += "for(var p"+i+"=0; p"+i+"<noOfChars; p"+i+"++) ";
+            functStr += "{  document.write(";
+            for(var i=noOfPlaces; i>0; i--)
+                functStr += "charSet[p"+i+"] +";
+            functStr += "'<br>');noOfComb++;}"
+            // and then execute what has been generated
+            console.log(functStr);
+            (new Function (functStr))();
+        }
+
+        for(var noOfPlaces=2; noOfPlaces<=4; noOfPlaces++)
+            generateCombinations(noOfPlaces);
+
+        document.write("<br>Total: "+noOfComb);
+
+    </script>
+</head>
+<body>
+</body>
+</html>
+
