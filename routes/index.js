@@ -35,6 +35,26 @@ router.get('/', function(req, res, next) {
     res.render('index', result);
 });
 
+/* API end point for getting the number of combinations (for unit testing) */
+router.get('/test', function(req, res, next) {
+    // ensure that the params are correct
+    var minPlaces = req.query.min_places;
+    var maxPlaces = req.query.max_places;
+    if(!minPlaces || !maxPlaces || isNaN(minPlaces) || isNaN(maxPlaces))
+        return res.sendStatus(500);
+    minPlaces = parseInt(minPlaces);
+    maxPlaces = parseInt(maxPlaces);
+    if(minPlaces<=0 || maxPlaces<minPlaces)
+        return res.sendStatus(500);
+    // prepare the contents
+    var noOfComb=0;
+    for(var noOfPlaces=minPlaces; noOfPlaces<=maxPlaces; noOfPlaces++){
+        var partialResult = generateCombinations(noOfPlaces);
+        noOfComb += partialResult.noOfComb;
+    }
+    res.send({noOfComb: noOfComb});
+});
+
 /* GET an html with client side js code that runs the same algorithm, but does it locally.  */
 router.get('/client_side', function(req, res, next) {
     res.render('client_side');
